@@ -142,7 +142,9 @@ public class Benchmark {
                 IntegerCODEC fastpfor  = new Composition(new FastPFOR(), new VariableByte());
                 IntegerCODEC optpfor  = new Composition(new OptPFDS9(), new VariableByte());
                 IntegerCODEC simple9  = new Simple9();
-                  System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor) ...");
+                IntegerCODEC jcopy  = new JustCopy();
+                IntegerCODEC vbyte = new VariableByte();
+                    System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor) ...");
                 try {
                         while ((doc = docMaker.makeDocument()) != null) {
                                 ia.clear();
@@ -167,8 +169,9 @@ public class Benchmark {
                                 double fastpforbpi = Benchmark.bitsperint(ia, fastpfor, buffer);  
                                 double optpforbpi = Benchmark.bitsperint(ia, optpfor, buffer);  
                                 double simple9bpi = Benchmark.bitsperint(ia, simple9, buffer);  
-                                
-                                System.out.println(ia.size()+"\t"+df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi)+"\t"+df.format(optpforbpi)+"\t"+df.format(simple9bpi));
+                                double vbytebpi = Benchmark.bitsperint(ia, vbyte, buffer);  
+                                 
+                                System.out.println(ia.size()+"\t"+df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi)+"\t"+df.format(optpforbpi)+"\t"+df.format(simple9bpi) +"\t"+df.format(vbytebpi));
                                 ++count;
                         }
                 } catch (org.apache.lucene.benchmark.byTask.feeds.NoMoreDataException nmd) {
