@@ -168,7 +168,7 @@ public class Benchmark {
                                 double ent = Benchmark.entropy(ia);
                                 double bpbpi = Benchmark.bitsperint(ia, bp, buffer);
                                 double fastpforbpi = Benchmark.bitsperint(ia, fastpfor, buffer);                                
-                                System.out.println(df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi));
+                                System.out.println(ia.size()+"\t"+df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi));
                                 ++count;
                         }
                 } catch (org.apache.lucene.benchmark.byTask.feeds.NoMoreDataException nmd) {
