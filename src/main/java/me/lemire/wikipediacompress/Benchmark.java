@@ -13,12 +13,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
-import me.lemire.integercompression.BinaryPacking;
-import me.lemire.integercompression.Composition;
-import me.lemire.integercompression.FastPFOR;
-import me.lemire.integercompression.IntWrapper;
-import me.lemire.integercompression.IntegerCODEC;
-import me.lemire.integercompression.VariableByte;
+import me.lemire.integercompression.*;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.benchmark.byTask.feeds.DocMaker;
@@ -145,7 +140,9 @@ public class Benchmark {
 
                 IntegerCODEC bp  = new Composition(new BinaryPacking(), new VariableByte());
                 IntegerCODEC fastpfor  = new Composition(new FastPFOR(), new VariableByte());
-                System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor)");
+                IntegerCODEC optpfor  = new Composition(new OptPFDS9(), new VariableByte());
+                IntegerCODEC simple9  = new Simple9();
+                  System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor) ...");
                 try {
                         while ((doc = docMaker.makeDocument()) != null) {
                                 ia.clear();
@@ -167,8 +164,11 @@ public class Benchmark {
                                 stream.close();
                                 double ent = Benchmark.entropy(ia);
                                 double bpbpi = Benchmark.bitsperint(ia, bp, buffer);
-                                double fastpforbpi = Benchmark.bitsperint(ia, fastpfor, buffer);                                
-                                System.out.println(ia.size()+"\t"+df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi));
+                                double fastpforbpi = Benchmark.bitsperint(ia, fastpfor, buffer);  
+                                double optpforbpi = Benchmark.bitsperint(ia, optpfor, buffer);  
+                                double simple9bpi = Benchmark.bitsperint(ia, simple9, buffer);  
+                                
+                                System.out.println(ia.size()+"\t"+df.format(ent)+"\t"+df.format(bpbpi)+"\t"+df.format(fastpforbpi)+"\t"+df.format(optpforbpi)+"\t"+df.format(simple9bpi));
                                 ++count;
                         }
                 } catch (org.apache.lucene.benchmark.byTask.feeds.NoMoreDataException nmd) {
