@@ -148,6 +148,7 @@ public class Benchmark {
                 try {
                         while ((doc = docMaker.makeDocument()) != null) {
                                 ia.clear();
+                                if(doc.getField("body") == null) continue;
                                 TokenStream stream = doc.getField("body")
                                         .tokenStream(analyzer);
                                 CharTermAttribute cattr = stream
