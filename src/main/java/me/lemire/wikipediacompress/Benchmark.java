@@ -106,7 +106,7 @@ public class Benchmark {
                 int MaxN = 1000*1000; //dictionary is limited to 1000000 words
                 BufferedReader br = new BufferedReader(new FileReader(dictfile));
                 
-                System.out.println("Loading first "+MaxN+" words from dictionary");
+                System.out.println("#Loading first "+MaxN+" words from dictionary");
                 String line;
                 HashMap<String,Integer> hm = new HashMap<String,Integer>();
                 int code = 0;
@@ -117,7 +117,7 @@ public class Benchmark {
                         if(code > MaxN) break;
                 }
                 br.close();
-                System.out.println("Loaded "+hm.size()+" words from dictionary.");
+                System.out.println("#Loaded "+hm.size()+" words from dictionary.");
 
                 StandardAnalyzer analyzer = new StandardAnalyzer(
                         Version.LUCENE_43);// default
@@ -136,7 +136,7 @@ public class Benchmark {
                                      // (gets the file opened?)
                 docMaker.setConfig(c, source);
                 int count = 0;
-                System.out.println("Parsing of Wikipedia dump "
+                System.out.println("#Parsing of Wikipedia dump "
                         + wikipediafile.getAbsolutePath());
                 long start = System.currentTimeMillis();
                 Document doc;
