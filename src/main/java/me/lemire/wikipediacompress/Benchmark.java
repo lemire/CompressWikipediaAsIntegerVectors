@@ -144,7 +144,7 @@ public class Benchmark {
                 IntegerCODEC simple9  = new Simple9();
                 IntegerCODEC jcopy  = new JustCopy();
                 IntegerCODEC vbyte = new VariableByte();
-                    System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor) ...");
+                    System.out.println("# entrop bitsperint(binarypacking) bitsperint(fastpfor) optpfor simple9 vbyte...");
                 try {
                         while ((doc = docMaker.makeDocument()) != null) {
                                 ia.clear();
